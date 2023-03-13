@@ -15,10 +15,9 @@ if __name__ == '__main__':
     print(item1.price)  # 8000.0
     print(item2.price)  # 20000
 
-    print(Item.all)   # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
+    print(Item.all)  # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
 
     item3 = Item("Телевизор", 20000, 1)
     Item.pay_rate = 0.5
     item3.apply_discount()
     print(item3.price)
-
