@@ -1,3 +1,5 @@
+import csv
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -39,11 +41,21 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self, name):
-        if len(name) <11:
+    def name(self, name:str):
+        if len(name) < 11:
             self.__name = name
 
+    @classmethod
+    def instantiate_from_csv(cls, CSV_PATH='../src/items.csv'):
+        with open(CSV_PATH) as file:
+            file_reader = csv.DictReader(file, delimiter=',')
+            for i in file_reader:
+                name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
+                cls.all.append((name, price, quantity))
 
-
-
-
+    @staticmethod
+    def string_to_number(number: str) -> int:
+        """Cтатический метод, возвращающий число из числа-строки
+        :return: Число в нужном нам формате
+        """
+        return int(number.split(".")[0])
