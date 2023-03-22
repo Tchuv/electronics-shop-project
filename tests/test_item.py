@@ -26,10 +26,16 @@ def test_apply_discount():
 #     assert Item.name == 'Смартфон'
 #     # Item.name = 'СуперСмартфон'
 #     # assert Item.name == 'Смартфон'
-
-
-
 def test_instantiate_from_csv():
     Item.instantiate_from_csv()
     item1 = Item.all[1]
     assert item1.name == 'Ноутбук'
+
+def test__repr__():
+    item1 = Item("Телик", 1000, 2)
+    assert repr(item1) == "Item('Телик', 1000, 2)"
+
+
+def test__str__():
+    item1 = Item("Видик", 1000, 2)
+    assert str(item1) == 'Видик'
