@@ -42,8 +42,9 @@ class Item:
 
     @name.setter
     def name(self, name:str):
-        if len(name) < 11:
-            self.__name = name
+        if len(name) >10:
+            raise Exception('Длина товара превышает 10 символов.')
+        self.__name = name
 
     @classmethod
     def instantiate_from_csv(cls, CSV_PATH='../src/items.csv'):
