@@ -10,7 +10,6 @@ class Phone(Item):
             self.number_of_sim = number_of_sim
 
 
-
     def __str__(self):
         return f"{self.name}"
 
@@ -19,3 +18,15 @@ class Phone(Item):
 
     def __add__(self, other):
         return self.quantity + other.quantity
+
+
+    # @property
+    # def number_of_sim(self):
+    #     return self.number_of_sim
+    #
+    # @number_of_sim.setter
+    # def number_of_sim(self, number_of_sim:str):
+    #     if number_of_sim > 0:
+    #         self.number_of_sim = number_of_sim
+    #     else:
+    #         raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
