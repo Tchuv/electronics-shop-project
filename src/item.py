@@ -67,5 +67,9 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
-    def __add__(self, other):
-        return self.quantity + other.quantity
+    def __add__(self, other:'Item'):
+        if isinstance(other, Item) or isinstance(other, Phone):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError('нельзя было сложить `Phone` или `Item` с экземплярами не `Phone` или `Item`')
+
