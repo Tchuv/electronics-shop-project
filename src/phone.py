@@ -28,10 +28,10 @@ class Phone(Item):
         else:
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
 
-    # def __add__(self, other: 'Item'):
-    #     if isinstance(other, Item) or isinstance(other, Phone):
-    #         return self.quantity + other.quantity
-    #     else:
-    #         raise TypeError('нельзя сложить `Phone` или `Item` с экземплярами не `Phone` или `Item`')
+    def __add__(self, other: 'Item'):
+        if isinstance(other, Item) or isinstance(other, Phone):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError('нельзя сложить `Phone` или `Item` с экземплярами не `Phone` или `Item`')
 
 
