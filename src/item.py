@@ -46,13 +46,13 @@ class Item:
             raise Exception('Длина товара превышает 10 символов.')
         self.__name = name
 
-    @classmethod
-    def instantiate_from_csv(cls, CSV_PATH='../src/items.csv'):
-        with open(CSV_PATH) as file:
-            file_reader = csv.DictReader(file, delimiter=',')
-            for i in file_reader:
-                name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
-                cls.all.append((name, price, quantity))
+    # @classmethod
+    # def instantiate_from_csv(cls, CSV_PATH='../src/items.csv'):
+    #     with open(CSV_PATH) as file:
+    #         file_reader = csv.DictReader(file, delimiter=',')
+    #         for i in file_reader:
+    #             name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
+    #             cls.all.append((name, price, quantity))
 
     @staticmethod
     def string_to_number(number: str) -> int:
@@ -72,4 +72,20 @@ class Item:
             return self.quantity + other.quantity
         else:
             raise TypeError('нельзя было сложить `Phone` или `Item` с экземплярами не `Phone` или `Item`')
+
+    @classmethod
+    def instantiate_from_csv(cls, CSV_PATH='../src/items.csv') -> None:
+        try:
+            with open(CSV_PATH) as file:
+                file_reader = csv.DictReader(file, delimiter=',')
+                for i in file_reader:
+                    if any(i.get(value) is None for value in ['name', 'price', 'quantity']):
+                        raise exceptions.exceptions.InstantiateCSVError
+                    name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
+                    cls.all.append((name, price, quantity))
+
+        except FileNotFoundError:
+            print('Отсутствует файл item.csv')
+        except csv.Error:
+            print('Файл item.csv поврежден')
 
